@@ -1,0 +1,78 @@
+
+https://youtu.be/w7ii4C_JJlY-tabulation logic refer from here
+https://youtu.be/yRqjQdCN7CE?list=TLGGScbOWW9HsdwwNDAzMjAyMg-coin change permutn 2 here in any permutation same coin can occur multiple times
+in coin change permutation 1 -same coin can occur atmost 1 time in any permutation for this start loop from processed coin index + 1 so that next time u don't take that coin while generating next permutation
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+  public static void main(String[] args) throws Exception {
+    Scanner sc = new Scanner(System.in);
+
+    int n = sc.nextInt();
+    int a[] = new int[n];
+    for (int i = 0; i < n; i++) {
+      a[i] = sc.nextInt();
+    }
+    int tar = sc.nextInt();
+    //recursion
+    int ans = coins_rec(a, n, tar);
+
+    int dp[] = new int[tar + 1];
+  
+    //memoization
+    //  Arrays.fill(dp, -1);
+    //   ans = coins_dp(a, n, tar, dp);
+    //tabulation
+  
+    ans = coins_tab(a, n, tar, dp);
+    System.out.println(ans);
+  }
+  public static int coins_tab(int[] a, int n, int tar, int dp[]) {
+
+
+
+
+    for (int i = 0; i <= tar; i++) {
+      if (i == 0) {
+        dp[i] = 1;
+
+      }
+      for (int j = 0; j < n; j++) {
+
+
+        if ((i - a[j]) >= 0) {
+
+          dp[i] += dp[i - a[j]];
+        }
+      }
+    }
+    return dp[tar];
+  }
+  public static int coins_rec(int[] a, int n, int tar) {
+    if (tar == 0) {
+      return 1;
+    }
+    int ans = 0;
+    for (int i = 0; i < n; i++) {
+      if ((tar - a[i]) >= 0) {
+        ans += coins_rec(a, n, tar - a[i]);
+      }
+    }
+    return ans;
+  }
+  public static int coins_dp(int[] a, int n, int tar, int dp[]) {
+    if (tar == 0) {
+      return dp[tar] = 1;
+    }
+    int ans = 0;
+    if (dp[tar] != -1) return dp[tar];
+    for (int i = 0; i < n; i++) {
+      if ((tar - a[i]) >= 0) {
+        ans += coins_rec(a, n, tar - a[i]);
+      }
+    }
+    return dp[tar] = ans;
+  }
+}

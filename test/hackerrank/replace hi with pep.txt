@@ -1,0 +1,78 @@
+ake as input Integer "i" which I used to verify your return type String.
+
+a. Write a recursive function which replace all ‘hi’ in the string with
+   pep. Print the i'th index character.
+b. Write a recursive function which removes all ‘hi’ in the string with
+  "pep". Print the output (return type void).
+
+
+Example(To be used only for expected output):
+
+Input:
+hihihijjhihi 1
+
+output
+e
+peppeppepjjpeppep
+Input Format
+
+String representing S.
+
+Constraints
+
+Size of String may be large.
+
+Output Format
+
+print Output.
+
+Sample Input 0
+
+hihihijjhihi 1
+Sample Output 0
+
+e
+peppeppepjjpeppep
+////////////////////////////////////////////
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+    
+        Scanner sc= new Scanner(System.in); //System.in is a standard input stream.
+        String str= sc.nextLine(); //reads string.
+        String[] newStr = str.split(" ");
+        String ans  = replaceHi(newStr[0],0,"");
+        System.out.println(
+            ans.charAt(Integer.parseInt(newStr[1]))
+                      );
+        System.out.println(ans);
+    }
+     static String replaceHi(String str,int index,String ans){
+         
+        if(index >= str.length()){
+            return ans;
+        }
+         if(str.charAt(index) == ' '){
+             return ans;
+         }
+         if(index + 1 == str.length()){
+                 ans = ans.concat(Character.toString(str.charAt(index)));
+             return ans;
+         }
+        if(Character.toString(str.charAt(index)).equals("h") 
+         
+           && Character.toString(str.charAt(index + 1)).equals("i") ){
+           ans =  ans.concat("pep");
+          ans = replaceHi(str,index+2,ans); 
+        }else{
+            ans = ans.concat(Character.toString(str.charAt(index)));
+            ans = replaceHi(str,index+1,ans); 
+        }
+       
+        return ans;
+    }
+}

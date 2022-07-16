@@ -1,0 +1,80 @@
+You are given a number n, representing the number of rows.
+You are given a number m, representing the number of columns.
+You are given n*m numbers, representing elements of 2d array a, which represents a gold mine.
+You are standing in front of left wall and are supposed to dig to the right wall. You can start from any row in the left wall.
+You are allowed to move 1 cell right-up (d1), 1 cell right (d2) or 1 cell right-down(d3).
+
+Each cell has a value that is the amount of gold available in the cell.
+
+You are required to identify the maximum amount of gold that can be dug out from the mine.
+Input Format
+
+Integer
+
+Constraints
+
+1<= r <= 10^9
+1<= c <= 10^9
+1<= A(i,j) <= 10^9
+Output Format
+
+Integer
+
+Sample Input 0
+
+4
+4
+2 6 0 5
+0 7 5 2
+3 0 3 7
+8 0 2 3 
+Sample Output 0
+
+22/////////////////////////////////////////////////////////
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc = new Scanner(System.in);
+        int m = sc.nextInt();
+        int n = sc.nextInt();
+        int[][] dp = new int[m][n];//by default all element are zero
+        for(int[] d:dp) Arrays.fill(d,-1);
+         int[][] mine = new int[m][n];
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                mine[i][j] = sc.nextInt();
+            }
+        }
+        int maxGold = 0;
+         for(int i=0;i<m;i++){
+             maxGold = Math.max(maxGold,goldminem(mine,i,0,dp));
+         }
+        System.out.println(maxGold);
+    }
+  
+  	public static int goldminem(int[][] mine, int r, int c, int[][] qb) {
+        if(c == mine[0].length-1){
+            return qb[r][c] = mine[r][c];
+        }
+        if(qb[r][c] != -1) return qb[r][c];
+        int ans = 0;
+        int[][] dir = {{-1,1},{0,1},{1,1}};
+        for(int[] d: dir ){
+            int x= r + d[0];
+            int y = c + d[1];
+            if(x>=0 && x< mine.length && y< mine[0].length){
+                        ans = Math.max(ans,goldminem(mine,x,y,qb));
+            }
+    
+        }
+        return qb[r][c] = ans + mine[r][c];
+      
+    }  
+}

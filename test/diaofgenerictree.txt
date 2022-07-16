@@ -1,0 +1,39 @@
+https://www.youtube.com/watch?v=GIA2cZgOdwg  
+
+static int dia = 0;
+    public static int calculateht(Node node){
+       int mh = -1;
+       int smh = -1;
+       for(Node child:node.children){
+           int childhttome = calculateht(child);
+           if(childhttome>mh){//update maxht and 2ndmaxht
+               mh = childhttome;
+               smh = mh;
+           }
+           else if(childhttome > smh){//update only second max ht
+               childhttome = smh;
+           }
+       }
+       dia =Math.max(( mh + smh +2),dia);//as it's not alsways necessary that dia always passes through root node,dia may get passed through any of the subtree-sumit malik video
+       //so calculat max among all dia in post order of a node and that will be the ans
+       
+       return mh + 1;//mh will be the actual ht of a nede coz ht gets calculated from max //no of edge 
+       
+       
+    }
+  
+
+  public static void main(String[] args) throws Exception {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int n = Integer.parseInt(br.readLine());
+    int[] arr = new int[n];
+    String[] values = br.readLine().split(" ");
+    for (int i = 0; i < n; i++) {
+      arr[i] = Integer.parseInt(values[i]);
+    }
+
+    Node root = construct(arr);
+        calculateht(root);
+        System.out.println(dia);
+    // write your code here
+  }

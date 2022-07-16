@@ -1,0 +1,77 @@
+
+Sample Input
+
+3
+
+Sample Output
+1 2 3 
+8 9 4 
+7 6 5
+import java.util.*;
+ 
+ public class Main {
+ 
+ 	 // This is a functional problem. You have to complete this function.
+ 	 // It takes as input an integer n. It should return the required matrix.
+ 	 public static int[][] generateMatrix(int n) {
+ 	 	 // write your code here.
+         int tne=n*n;
+        int minr=0;
+        int minc=0;
+        int maxr=n-1;
+        int maxc=n-1;
+         int num=1; 
+         int[][] result = new int[n][n]; 
+         //clockwise
+        while(tne>0){
+            //top
+            for(int i =minc;i<=maxc && tne>0;i++){
+                tne--;
+                result[minr][i]=num++;
+            }
+            minr++;
+            //right
+            for(int i =minr;i<=maxr && tne>0;i++){
+                 tne--;
+                result[i][maxc]=num++;
+            }
+            maxc--;
+            //bottom
+                for(int i =maxc;i>=minc && tne>0;i--){
+                tne--;
+                result[maxr][i]=num++;
+            }
+            maxr--; 
+            //left
+                    for(int i =maxr;i>=minr && tne>0;i--){
+              tne--;
+                result[i][minc]=num++;
+            }
+            minc++; 
+        }
+        return result;
+ 	 }
+ 
+ 	 public static void main(String[] args) {
+ 	 	 Scanner sc = new Scanner(System.in);
+ 	 	 int N = sc.nextInt();
+ 
+ 	 	 int[][] result = generateMatrix(N);
+ 	 	 display(result);
+ 	 }
+ 
+ 	 // function to display a matrix.
+ 	 public static void display(int[][] mat) {
+ 
+ 	 	 for (int i = 0; i < mat.length; i++) {
+ 
+ 	 	 	 for (int j = 0; j < mat[0].length; j++) {
+ 	 	 	 	 System.out.print(mat[i][j] + " ");
+ 	 	 	 }
+ 
+ 	 	 	 System.out.println();
+ 	 	 }
+ 
+ 	 }
+ 
+ }

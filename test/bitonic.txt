@@ -1,0 +1,5 @@
+//bitonic subsequence
+https://youtu.be/jdfpGSSyN2I
+////////////////////////////////////////////
+refer code
+https://www.geeksforgeeks.org/longest-bitonic-subsequence-dp-15/

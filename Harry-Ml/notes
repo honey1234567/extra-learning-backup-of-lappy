@@ -1,0 +1,61 @@
+for implementation- refer https://youtu.be/iIkJrwVUl1c
+
+
+for quiz :-
+refere https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-convert-ml-experiment-to-production
+tutorial next of ml-https://youtu.be/cSKfRcEDGUs?list=PLOU2XLYxmsIIuiBfYad6rFYQU_jL2ryal
+
+
+csv formatting after data download from uci repo:
+follow code with harry end to end ml project
+
+value counts will tell counts of each entry 
+
+housing.describe():-
+25%-25 percentile of specific column means 25%value are less than the displayed value of that column
+
+steps:
+
+check missing data by housing.info()
+plot histogram and analyze like from age graph we can say :-
+    x-how old house is
+
+
+spltting has 2 method-
+    1.Manual- by iloc and  split_train_test()
+              shuffle-without random seed if u run again and again ,everytime u will get different answer coz it has seen all data including                       test set
+    2.scikit learn-train_test_split
+          for CHAS(output) to be distributted equally on train and test set that is both should have equal values of zeros and ones,if train           set rows only contain CHAS values as zero and u gave a test set which contains chas value as 1 then your model will predict wrong           coz it didnt trained with CHAS 1
+          so use StratifiedShuffleSplit
+    
+ correlation-to disacrd attributes(feature selection)
+             1. +ve correlation-1 or 0.69(strong positive correlation)-icreasing 1 column will lead to increse MEDV
+                                 0.39(not strong positive correlation)
+             2. -ve correlation- -0.69 (strong neggative correlation)
+            usage- 
+    for more clearence-refer https://www.youtube.com/watch?v=FndwYNcVe0U
+                              https://www.youtube.com/watch?v=-HNeDT2qjcg
+     https://towardsdatascience.com/feature-selection-with-pandas-e3690ad8504b
+    
+Handle missing attributes with 3rd option with impuetr and transform all missing value of any column with median on tarining data
+
+pipe line-automate things[series of steps]
+    purpose for creating pipe line is to make a code change easily like model or strategy etc
+    standardization is better than normalization for feature scaling coz min max can change by mistake so there will be a huge impact but       normalication effects will not be much
+    
+learn feature scaling-
+
+    used to modify feature to same sale
+    https://www.geeksforgeeks.org/ml-feature-scaling-part-     2/#:~:text=Feature%20Scaling%20is%20a%20technique,data%20in%20a%20fixed%20range.&text=If%20feature%20scaling%20is%20not,the%20unit%20of%20the%20values.
+    https://youtu.be/nmBqnKSSKfM
+
+cross validation-coz we gave all train data on model so error is 0 so we will divide train data into train and test to avoid overfiltting many time by grouping and will find mean error each time
+scores will be neggative from cross validation
+
+                              
+histogram axis definition will be change according to description of each attribute in housing.names exampele-
+    from medv plot 
+    y-cost of house
+    x-owners
+    Note-the graph shows data is wrong coz maximum cost is 35$ and in the description it is different
+More data we use for train than testing

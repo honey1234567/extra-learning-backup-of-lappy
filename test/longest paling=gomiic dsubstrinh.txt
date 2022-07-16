@@ -1,0 +1,95 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+//recursion
+     //String ans = lps_rec(str,0,str.length()-1);
+    // System.out.println(ans.length());
+    
+     //by default null is stored on string
+   //  Memoization
+   // System.out.println( lps_dp(str,0,str.length()-1,dp).length());
+//tabulation
+
+System.out.println( lps_tab(str,0,str.length()-1));
+ 
+    }
+public static int lps_tab(String str,int s, int e){
+
+     int dp[][] = new int[str.length()][str.length()];
+     //we are traversing diagnolly
+        //first principal diagnol then above all diag of principal diagonal
+        // which take help from below diagnol to make their ans
+        //All values in principal diagonal are 1 and below below principal diagonal are zero
+        //Print DP array to analyze
+    for(int gap=0;gap<str.length();gap++){
+        for(int i=0,j=gap;i<str.length() && j <str.length();i++,j++){
+
+                if(i == j){
+                    dp[i][j] = 1;
+                    continue;
+                }
+                // if(i>j){
+                //    No need to put this condition as by default values are zero in table
+
+                //     dp[i][j] = 0;
+                //     continue;
+                // }
+           
+            
+        
+            if(str.charAt(i) == str.charAt(j) && dp[i+1][j-1] == j-i-1){
+            
+ dp[i][j] = dp[i+1][j-1]+2;
+               
+               
+            }else{
+
+    int a = dp[i][j-1];
+    int b = dp[i+1][j];
+              
+     dp[i][j] = a > b?a:b;
+        }
+        }
+    }
+
+  return dp[s][e];  
+
+}
+public static String lps_dp(String str,int s, int e,String dp[][]){
+    if(s>=e){
+       return  dp[s][e]=(s == e ?  str.substring(s,e+1) : "");
+    }
+
+if( dp[s][e] == null && str.charAt(s) == str.charAt(e) && lps_dp(str,s+1,e-1,dp).length() == e-s-1){
+    return dp[s][e] = str.substring(s,e+1);
+}else{
+    if(dp[s][e] == null){
+    String a = lps_dp(str,s,e-1,dp);
+    String b = lps_dp(str,s+1,e,dp);
+     dp[s][e] = a.length() > b.length()?a:b;
+    }
+return dp[s][e];
+}
+    
+
+}
+
+public static String lps_rec(String str,int s, int e){
+    if(s>=e){
+       return  (s == e ?  str.substring(s,e+1) : "");
+    }
+if(str.charAt(s) == str.charAt(e) && lps_rec(str,s+1,e-1).length() == e-s-1){
+    return str.substring(s,e+1);
+}else{
+    String a = lps_rec(str,s,e-1);
+    String b = lps_rec(str,s+1,e);
+    return a.length() > b.length()?a:b;
+}
+
+}
+ }
