@@ -1,4 +1,4 @@
-
+//jquer is easy for dom manipulation
 let defaultProperties = {//to each cell
     text: "",
     "font-weight": "",
